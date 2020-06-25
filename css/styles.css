@@ -1,0 +1,627 @@
+/*=====================================================
+===================== ELEMENTS ========================
+===================================================== */
+
+body {
+  font-family: 'Rubik', sans-serif;
+  height: 150vh;
+  background: #eee; z-index:1;
+  margin: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+img {
+  width: 100%;
+}
+
+a {
+  color: #72aeb2;
+}
+
+textarea {
+  height: 18vh;
+  width: 100%;
+}
+
+ul {
+  padding: 0;
+}
+
+/* bit hacky. should probably align these using justify/align properties */
+h2,
+h3 {
+  text-decoration: underline;
+  margin-top: 0;
+}
+
+
+
+/* ===================== PSUEDO CLASSES ==================== */
+
+a:visited {
+  color: #72aeb2;;
+  
+  /* will be the below colour, but just for testing I want it to be the fresh link colour */
+  /* color: #8a3018; */
+}
+
+.carousel__track button:focus,
+.btn-orange:focus {
+  background-color: white;
+  color: #a83617;
+  border: 1px solid #a83617;
+  outline:none;
+}
+
+.btn-grey:focus {
+  background-color: white;
+  color: #888585;
+  border: 1px solid #888585;
+  outline:none;
+}
+
+/* ===================== BANNER IMG ==================== */
+
+.banner-container {
+  height: 100vh;
+  display: flex;
+  font-size: 3vw;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee;
+}
+
+.banner-container h1{
+  margin-bottom: 0;
+}
+
+.banner-container div div {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.banner-container div div {
+  color: #fc4a1a;
+}
+
+
+/* =====================================================
+   ===================== CLASSES =======================
+   ===================================================== */
+
+/* ===================== FORMATTING/LAYOUT/GRIDS ==================== */
+/* .nav-parent-wrapper {
+  position: relative;
+ 
+}
+
+.test-wrapper {
+  display: flex;
+}
+
+.nav-bar-wrapper {
+  margin: 0 auto;
+  position: absolute;
+} */
+
+
+.container {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.wrapper {
+  width: 65%;
+  margin: 0 auto;
+}
+
+/* ===================== NAV BAR ==================== */
+
+/* nav {
+  background-color: #fc4a1a;
+  height: 100vh;
+  width: 100%;
+}
+
+.nav-wrapper {
+  width: 100%;
+}
+
+nav li a:visited {
+  color: #fff;
+} */
+
+.nav-bar {
+  display: grid;
+  grid-template-columns: .4fr 1fr .5fr ;
+  margin: 4em 1em;
+  border-bottom: 1px dashed #696969;
+}
+
+.nav-bar span {
+  font-size: 1.25em;
+}
+
+.nav-bar div:not(:last-child) {
+  border-right: 1px dashed #696969;
+
+}
+
+.nav-items {
+  font-size: 1.25em;
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 1em;
+}
+
+.nav-items a {
+  color: #fc4a1a;
+}
+
+.social {
+  font-size: 1.25em;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+/* should probably figure out the css module thing again */
+
+/* ===================== INDEX ==================== */
+
+.carousel {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.articles {
+  margin: 3em 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .5em;
+}
+
+/* centres Watch more videos in the video section */
+.articles > div > div  {
+  justify-content: center;
+  display: flex;
+  
+}
+
+.row-1,
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+}
+
+
+/* this seems way too hacked together, but it does work. ?? maybe I could use nth child stuff here ?? */
+.pink-bg > h3 {
+  color: #FF1493;
+}
+
+.teal-bg > h3 {
+  color: #008080;
+}
+
+.orange-bg > h3 {
+  color: #fc4a1a;
+}
+
+.blue-bg > h3 {
+  color: #779ecb ;
+}
+
+.pink-bg {
+  margin-bottom: 50px;
+  background: #FF1493;
+  height: 224px;
+}
+
+.teal-bg {
+  background: #008080;
+  height: 224px;
+}
+
+.orange-bg {
+  background: #fc4a1a;
+  height: 224px;
+}
+
+.blue-bg {
+  background: #779ecb ;
+  height: 224px;
+}
+
+.ingredients {
+  width: 50%;
+}
+
+.ingredients,
+.pop-lists {
+  margin: 2em 0;
+}
+
+.ingredients,
+.pop-lists > div > li {
+  padding: .5em 0;
+}
+
+.comments > div:nth-child(even),
+.ingredients li:nth-child(even),
+.pop-lists > div > li:nth-child(even) {
+  background-color: #eeeeee;
+}
+
+
+/* ===================== /END INDEX ==================== */
+
+/* ===================== MODAL ==================== */
+
+.modal-container {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal-container.show-modal {
+  display: block;
+}
+
+.modal {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  width: 400px;
+}
+
+.modal-header {
+  background: #fc4a1a;
+  color: #fff;
+  padding: 15px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  text-decoration: none;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.modal-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* along with the dispay block this stretches out each input field and gives them
+a nice amount of padding */
+.modal-form .form-input {
+  padding: 8px;
+  width: 100%;
+}
+
+.close-btn {
+  background: transparent;
+  font-size: 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  border: 1px solid #fff;
+}
+
+/* ===================== /END MODAL ==================== */
+
+/* ===================== MODAL ==================== */
+
+.carousel__track button,
+.btn-grey,
+.btn-orange {
+  border-radius: 16px;
+  margin: 8px 10px;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+  
+.btn-grey {
+  background-color: white;
+  color: #595959;
+  border: 1px solid #595959;
+}
+
+.carousel__track button,
+.btn-orange {
+  background-color: white;
+  color: #fc4a1a;
+  border: 1px solid #fc4a1a;
+}
+
+/* ===================== /END MODAL ==================== */
+
+
+.social-profile {
+  border: 1px solid black;
+  margin: 1em;
+  padding: 1em;
+}
+
+.user-ferments {
+  background: #eeeeee;
+  padding: 1em;
+  font-size: 1.25em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 1em;
+}
+
+.col-split {
+  background: white;
+  margin-top: 7em;
+  padding: 2em;
+  display: grid;
+  grid-template-columns: .7fr .3fr;
+  align-items: start;
+  gap: 1em;
+}
+
+/* ===================== INDEX ==================== */
+
+
+/* ===================== RECIPES/FERMENTATIONS ==================== */
+
+
+.recipe {
+  margin-top: 0em;
+  margin-bottom: 1em;
+  padding: 1em;
+  display: grid;
+  background: white;
+  grid-template-columns: .1fr 1fr;
+  border-bottom: 1px dashed #696969;
+}
+
+.details { 
+  font-size: 1.25em;
+  margin-left: 1em;
+  padding-bottom: 1em;
+}
+
+.details li {
+  margin: .5em 0em;
+}
+
+.options {
+  margin-top: 1em;
+  display: flex;
+}
+
+.options div:first-child {
+  margin-right: auto;
+}
+
+.options div a:not(:first-child) {
+  margin-left: 1em;
+}
+
+.ferment {
+  margin: 1em;
+}
+
+.full-recipe {
+  font-size: 1.2em;
+  border-bottom: 1px dashed #696969;
+}
+
+.recipe-details {
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+/* ===================== COMMENTS ==================== */
+
+.comments {
+  font-size: 1.15em;
+}
+
+.comments > div {
+  padding: 1em 0em;
+  border-bottom: 1px dashed #696969;
+}
+
+.comments > div:first-child {
+  border-top: 1px dashed #696969;
+}
+
+.comment-box {
+  display: flex;
+  margin: 1em 0em;
+}
+
+
+/* ===================== IMG FORMATTING ==================== */
+
+.profile-pic {
+  width: 20%;
+  border-radius: 50%;
+}
+
+.full-recipe-img {
+  width: 220px;
+  height: 220px;
+}
+
+.recipe-img {
+  height: 110px;
+  width: 110px;
+  border: 1px black solid;
+}
+
+.article-img {
+  height: 224px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.article-img-shifted {
+  transform: translateX(15px);
+  height: 224px;
+  width: 100%;
+  object-fit: cover;
+}
+
+
+/* =====================================================
+   ===================== ANIMATIONS ====================
+   ===================================================== */
+
+/* ===================== TEXT FILL ==================== */
+
+
+.text-fill {
+  background-color: #565656;
+  position: relative;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.text-fill::before {
+  content: attr(data-title);
+  background: linear-gradient(to right,#fc4a1a, #696969, rgb(134, 132, 132));
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 0;
+  transition: all 1s ease-in-out;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+
+}
+
+.text-fill:hover::before {
+  width: 100%;
+}
+
+/* ===================== BUBBLES ==================== */
+
+.bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  transform: translateZ(0);
+}
+
+.bubbles li {
+  position: absolute;
+  list-style:none;
+  display: block;
+  background-color: #fc4a1a;
+  bottom: -50px;
+  animation: bubble 20s infinite;
+  transition-timing-function: linear;
+  border-radius: 50%;
+}
+
+.bubbles li:nth-child(1) {
+  width: 40px;
+  height: 40px;
+  left: 10%;
+}
+
+.bubbles li:nth-child(2) {
+  width: 60px;
+  height: 60px;
+  left: 40%;
+  z-index: 2;
+  animation-delay: 2s;
+  animation-duration: 17s;
+}
+
+.bubbles li:nth-child(3) {
+  width: 10px;
+  height: 10px;
+  left: 60%;
+  animation-delay: 4s;
+  animation-duration: 13s;
+}
+
+.bubbles li:nth-child(4) {
+  width: 80px;
+  height: 80px;
+  left: 15%;
+  z-index: 2;
+  animation-delay: 1s;
+  animation-duration: 8s;
+}
+
+.bubbles li:nth-child(5) {
+  width: 30px;
+  height: 30px;
+  left: 45%;
+  animation-delay: 7s;
+  animation-duration: 12s;
+}
+
+.bubbles li:nth-child(6) {
+  width: 65px;
+  height: 65px;
+  left: 75%;
+  z-index: 2;
+  animation-delay: 1s;
+  animation-duration: 11s;
+}
+
+.bubbles li:nth-child(7) {
+  width: 35px;
+  height: 35px;
+  left: 23%;
+  animation-delay: 7s;
+  animation-duration: 10s;
+}
+
+.bubbles li:nth-child(8) {
+  width: 50px;
+  height: 50px;
+  left: 90%;
+  animation-delay: 5s;
+  animation-duration: 9s;
+}
+
+@keyframes bubble {
+  0% {
+    -webkit-transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-1080px) rotate(630deg);
+  }
+}
+
+
+
