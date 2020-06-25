@@ -336,6 +336,16 @@ class Users extends Dbh {
     return $indvIngredients;
   } 
 
+  // Get a user's most recent recipe. 
+  protected function getUserRecentRecipe($username) {
+    $sql = "SELECT MAX(idFerment) from ferments WHERE user = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute([$username]);
+    $results = $stmt->fetchAll();
+    return $results;
+  }
+
+
   // $ingredients = "cumin, seven spice mix, flake, sprinkles";
   // $indvIngredients = explode(", ", $ingredients);
   // echo $indvIngredients[0];

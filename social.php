@@ -6,12 +6,17 @@
   include_once 'classes/userscontr.class.php';
 
 ?>
+<div class="wrapper">
+  
+  <div>
+    <h3>Users</h3>
 
-<div class="user-profiles">
-  <?php
-    $allUsers = new UsersView();
-    $allUsers->displayAllUserProfiles();
-  ?>
+    <?php
+      $allUsers = new UsersView();
+      $allUsers->displayAllUserProfiles();
+    ?>
+  </div>
+  
 </div>
 
 <?php 

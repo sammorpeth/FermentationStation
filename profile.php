@@ -59,7 +59,17 @@
 
 
   <?php
-    $username = $_SESSION['username'];
+    // if the current user is the same as a user who is clicked on in a recipe page for example,
+    // that is passed in as the user's profile to be displayed. If not it checks the $_GET['username'] variable
+    // to see whihc profile had been clicked on in the link. Could maybe make this its own function? 
+    $profileUsername = $_GET['username'];
+    $currentUsername = $_SESSION['username'];
+
+    if ($profileUsername == $currentUsername) {
+      $username = $profileUsername;
+    } else {
+      $username = $userProfile; 
+    }
 
   ?>
   </div>

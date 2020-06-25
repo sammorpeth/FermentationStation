@@ -134,6 +134,10 @@ class UsersContr extends Users {
     return $this->explodeIngredients($ingredients);
   }
 
+  public function returnUserRecentRecipe($username) {
+    return $this->getUserRecentRecipe($username);
+  }
+
   // ====================================================== //
   // ================= CRUD FERMENTATIONS ================= //
   // ====================================================== //

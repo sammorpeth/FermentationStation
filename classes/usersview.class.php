@@ -90,21 +90,33 @@ class UsersView extends Users {
       echo '<div class="social-profile">
       <h3>' . $username.'\'s Profile</h3>
       <ul>'.
-      '<img src="https://randomuser.me/api/portraits/'. $gender .'/' . $randomNum .'.jpg" class="profile-pic">' . 
-      '<li><strong>Username</strong>: '.$row['username'] . '</li>' .
-      '<li><strong>Number of ferments</strong>: '. $numOfFerments .'</li>' .
-      // todo: add most popular recipe
-      '<li><strong>Most popular recipe</strong>: '. $numOfFerments .'</li>' .
-
-      '<li><strong>Member since</strong>: '. $row['user_since'].'</li>' 
-      .'</ul>
+        '<img src="https://randomuser.me/api/portraits/'. $gender .'/' . $randomNum .'.jpg" class="profile-pic">' . 
+        '<li><strong>Username</strong>: '.$row['username'] . '</li>' .
+        '<li><strong>Number of ferments</strong>: '. $numOfFerments .'</li>' .
+        // todo: add most popular recipe
+        '<li><strong>Most popular recipe</strong>: '. $numOfFerments .'</li>' .
+        '<li><strong>Member since</strong>: '. $row['user_since'].'</li>' 
+     .'</ul>
       <a href="user-ferment.php?username='. $username.'">'. $username .'\'s Ferments</a>
       </div>';
+      $usersRecipe = new UsersContr();
+      $results = $usersRecipe->returnUserRecentRecipe($username);
+      var_dump($results);
+      if ($results[0] !== NULL ) {
+        $idFerment = $results[0]['MAX(idFerment)'];
+        $this->showFerment($idFerment);
+      } else {
+        echo "<h3>This user is yet to upload any recipes to the site.</h3>";
+      }
+      
     }
   }
 
+  
+
   // ================ COMMENTS SYSTEM ================== //
 
+  // Format and show the most recent comment on a given fermentation
   public function showRecentComment($idFerment) {
     $commentResults = $this->getRecentComment($idFerment);
     if (count($commentResults) > 0) {
@@ -121,6 +133,7 @@ class UsersView extends Users {
     }
   }
 
+  // Format and show the most recent comment on a fermentation on a user's profile
   public function showRecentCommentsProfile($username, $idFerment) {
     $commentResults = $this->getRecentCommentsProfile($username, $idFerment);
     var_dump($commentResults);
@@ -140,6 +153,7 @@ class UsersView extends Users {
     }
   }
 
+  // Format and show the most recent comment on a fermentation's full page
   public function show5RecentComments($idFerment) {
     $newContr = new UsersContr();
     $recentComments = $newContr->return5RecentComments($idFerment);
@@ -216,6 +230,7 @@ class UsersView extends Users {
     echo $entryName;
   }
 
+  // Format and show the relevant recipe with full instructions
   public function showFerment($idFerment) {
     $fermentObj = new UsersContr();
     $ferment = $fermentObj->getFerment($idFerment);
@@ -226,7 +241,8 @@ class UsersView extends Users {
                     <h2>" . $ferment[0]['name'] . "</h2>
                    
                     <ul>
-                      <li><strong>Recipe by</strong>: <a href=''>" . $ferment[0]['user']. "</a></li>
+                      <li><strong>Recipe by</strong>: <a href='profile.php?&username=" 
+                      . $ferment[0]['user'] ."'>" . $ferment[0]['user']. "</a></li>
                       <li><strong>Votes:</strong>:" . $ferment[0]['votes']. "</a></li>
                       <li><strong>Description:</strong>:" . $ferment[0]['description']. "</li>
                     </ul>
@@ -236,6 +252,7 @@ class UsersView extends Users {
     $this->showIngredientsList($ferment[0]['spices']);
   }
 
+  // Format the ingredients in a list
   public function showIngredientsList($ingredients) {
     $fermentObj = new UsersContr();
     $ingredients = $fermentObj->explodeIngredients($ingredients);
@@ -318,7 +335,7 @@ class UsersView extends Users {
           echo "<div class='comment'>
                   <h2>Recent Comment</h2>
                   <p>" . $recipeComment[0]['comment'] . "</p>
-                  <li><a href=''><strong>Commenter</strong></a>: " . $recipeComment[0]['commenter'] . "
+                  <li><strong>Commenter</strong>: <a href='profile.php?username=". $recipeComment[0]['commenter']."'>" . $recipeComment[0]['commenter'] . "</a>
                   <li><strong>Time written</strong>: " . $recipeComment[0]['time_written'] . "
                   <li><strong>Date written</strong>: " . $recipeComment[0]['date_written'] . "
                 </div>";
