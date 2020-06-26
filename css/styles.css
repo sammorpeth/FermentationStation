@@ -118,6 +118,12 @@ a:visited {
   margin: 0 auto;
 }
 
+.social-col-split {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 1em;
+}
+
 /* ===================== NAV BAR ==================== */
 
 /* nav {
@@ -360,8 +366,9 @@ a nice amount of padding */
 
 
 .social-profile {
+  background: white;
   border: 1px solid black;
-  margin: 1em;
+  margin: 0em 1em 1em 1em;
   padding: 1em;
 }
 
@@ -372,17 +379,23 @@ a nice amount of padding */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   margin: 1em;
+  border-radius: 5px;
+
 }
 
 .col-split {
-  background: white;
-  margin-top: 7em;
-  padding: 2em;
   display: grid;
   grid-template-columns: .7fr .3fr;
+  background: #fff;
+  margin-top: 1em;
+  padding: 2em;
   align-items: start;
   gap: 1em;
+  border-radius: 5px;
+
 }
+
+
 
 /* ===================== INDEX ==================== */
 
@@ -397,7 +410,12 @@ a nice amount of padding */
   display: grid;
   background: white;
   grid-template-columns: .1fr 1fr;
-  border-bottom: 1px dashed #696969;
+  border: 1px solid #000;
+}
+
+/* If a user has no recipes this stops the normal formatting and columns of a recipe */
+.recipe.blank {
+  display: block;
 }
 
 .details { 
@@ -434,7 +452,14 @@ a nice amount of padding */
 
 .recipe-details {
   display: flex;
-  justify-content: flex-start;
+  /* flex-direction: column; */
+}
+
+.recipe-details > div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1em;
+
 }
 
 
@@ -490,6 +515,25 @@ a nice amount of padding */
   object-fit: cover;
 }
 
+/* =====================================================
+   ===================== MESSAGES ======================
+   ===================================================== */
+
+.message {
+  display: flex;
+  justify-content: flex-start;
+  color: white;
+  background: #fc4a1a;
+  padding: 1em;
+  /* margin: 1em; */
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 3px 3px 1px 1px #fff;
+}
+
+.message div {
+  width: 50%;
+}
 
 /* =====================================================
    ===================== ANIMATIONS ====================

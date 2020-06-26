@@ -7,15 +7,21 @@
 
 ?>
 <div class="wrapper">
-  
-  <div>
-    <h3>Users</h3>
 
-    <?php
-      $allUsers = new UsersView();
-      $allUsers->displayAllUserProfiles();
-    ?>
-  </div>
+    <div class="message">
+      <div >
+        <h2>Users</h2>
+      </div>
+      <div >
+        <h2>Users's Recipes</h2>
+      </div>
+    </div>
+    <div class="social-col-split">
+      <?php
+        $allUsers = new UsersView();
+        $allUsers->displayAllUserProfiles();
+      ?>
+    </div>
   
 </div>
 

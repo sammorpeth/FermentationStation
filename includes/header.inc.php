@@ -81,7 +81,7 @@
 <!-- Need to figure out a better place to put this because it interferes
 with the sign up modal. I could put the sign up in a CTA button and not in the header. -->
 <!-- Modal -->
-<!-- <div class="modal-container" id="modal">
+ <div class="modal-container" id="modal">
   <div class="modal">
     <button class="close-btn" id="close-modal">X</button>
     <div class="modal-header">
@@ -111,7 +111,7 @@ with the sign up modal. I could put the sign up in a CTA button and not in the h
       </form>
     </div>
   </div>
-</div> -->
+</div> 
    
 
       </div>

@@ -78,7 +78,6 @@ class UsersView extends Users {
       $randomNum = rand(0, 100);
       // determine the remainder
       $remainder = $randomNum % 2;
-      
       // set the gender of the display pic based on if the random num is odd or even
       $gender = '';
       if ($remainder == 1) {
@@ -99,18 +98,32 @@ class UsersView extends Users {
      .'</ul>
       <a href="user-ferment.php?username='. $username.'">'. $username .'\'s Ferments</a>
       </div>';
+      // Find the most recent recipe by a user
       $usersRecipe = new UsersContr();
       $results = $usersRecipe->returnUserRecentRecipe($username);
-      var_dump($results);
-      if ($results[0] !== NULL ) {
+      // check that there is an existing recipe
+      if (count($results[0]) !== 0 ) {
+        // find the most recent recipe
         $idFerment = $results[0]['MAX(idFerment)'];
-        $this->showFerment($idFerment);
-      } else {
-        echo "<h3>This user is yet to upload any recipes to the site.</h3>";
-      }
-      
+        $newContr = new UsersContr();
+        // pass that recipe's idFerment to returnFerment to get info on that recipe
+        $recentRecipe = $newContr->returnFerment($idFerment);
+
+        if(count($recentRecipe) >= 1) {
+          // format the most recent recipe's info in a similar manner to how it is formatted on the full fermentations page.
+          $this->formatRecipe($recentRecipe[0]);
+        } else {
+          echo "
+          <div class='recipe blank'>
+            <h3>It seems this user has not yet added any recipes to the site.</h3>
+          </div>
+          ";
+        }
+      } 
     }
   }
+
+
 
   
 
@@ -237,16 +250,18 @@ class UsersView extends Users {
     // the closed div for this is created in the showIngredientsList function so that styles can be applied to it. I'm sure this is a terrible way of doing things. 
          echo"<div class='full-recipe'>
                 <div class='recipe-details'>
-                  <img src='https://picsum.photos/200/300' class='full-recipe-img'>
-                    <h2>" . $ferment[0]['name'] . "</h2>
-                   
-                    <ul>
-                      <li><strong>Recipe by</strong>: <a href='profile.php?&username=" 
-                      . $ferment[0]['user'] ."'>" . $ferment[0]['user']. "</a></li>
-                      <li><strong>Votes:</strong>:" . $ferment[0]['votes']. "</a></li>
-                      <li><strong>Description:</strong>:" . $ferment[0]['description']. "</li>
-                    </ul>
-                </div>
+                    <img src='https://picsum.photos/200/300' class='full-recipe-img'>
+                    <div>
+                      <h2>" . $ferment[0]['name'] . "</h2>
+                    
+                      <ul>
+                        <li><strong>Recipe by</strong>: <a href='profile.php?&username=" 
+                        . $ferment[0]['user'] ."'>" . $ferment[0]['user']. "</a></li>
+                        <li><strong>Votes:</strong>:" . $ferment[0]['votes']. "</a></li>
+                        <li><strong>Description:</strong>:" . $ferment[0]['description']. "</li>
+                      </ul>
+                    </div>
+                 </div>
                   <p><strong>Instructions:</strong>:" . $ferment[0]['instructions']. "</p>
          ";
     $this->showIngredientsList($ferment[0]['spices']);
@@ -275,31 +290,35 @@ class UsersView extends Users {
     $ferment = new UsersContr();
     $results = $ferment->returnAllFerments();
     foreach ($results as $row) {
-      echo "<div class='recipe'>";
-        echo "<div>";
-         echo "<img src='https://picsum.photos/200/300' class='recipe-img'>";
-        echo "</div>";
-          echo "<div class='details'>";
-          echo "<h2> " . $row['name'] . "</h2>";
-          echo "<span><strong>Votes</strong>: " . $row['votes'] . "</span>";
-          echo "<li><strong>Type</strong>: " . $row['type'] . "</li>";
-          echo "<li><strong>Description</strong>: " . $row['description'] . "</li>";
-          echo "<li><strong>Total days</strong>: " . $row['total_days'] . "</li>";
-          echo "<div class='options'>
-                  <div>
-                    <a href='recipe.php?idFerment=". $row['idFerment'] ."&user=" . $row['user'] ."'>Read more...</a>
-                  </div>";
-        // TODO: if the user is equal to the recipe displayed they can also delete/update the entry from this page
-          if (isset($_SESSION['user_type']) == 'admin') {
-            echo "<div>
-                    <a href='update.php?idFerment=" . $row['idFerment'] ."'>Update</a>" . 
-                    " <a href='delete.php?idFerment=" . $row['idFerment'] ."'>Delete</a>
-                    </div>
-                  </div>" . " ";
-          }
-        echo "</div>";
-      echo "</div>";
+     $this->formatRecipe($row);
     }
+  }
+
+  public function formatRecipe($recipe) {
+    echo "<div class='recipe'>";
+    echo "<div>";
+     echo "<img src='https://picsum.photos/200/300' class='recipe-img'>";
+    echo "</div>";
+      echo "<div class='details'>";
+      echo "<h2> " . $recipe['name'] . "</h2>";
+      echo "<span><strong>Votes</strong>: " . $recipe['votes'] . "</span>";
+      echo "<li><strong>Type</strong>: " . $recipe['type'] . "</li>";
+      echo "<li><strong>Description</strong>: " . $recipe['description'] . "</li>";
+      echo "<li><strong>Total days</strong>: " . $recipe['total_days'] . "</li>";
+      echo "<div class='options'>
+              <div>
+                <a href='recipe.php?idFerment=". $recipe['idFerment'] ."&user=" . $recipe['user'] ."'>Read more...</a>
+              </div>";
+    // TODO: if the user is equal to the recipe displayed they can also delete/update the entry from this page
+      if (isset($_SESSION['user_type']) == 'admin') {
+        echo "<div>
+                <a href='update.php?idFerment=" . $recipe['idFerment'] ."'>Update</a>" . 
+                " <a href='delete.php?idFerment=" . $recipe['idFerment'] ."'>Delete</a>
+                </div>
+              </div>" . " ";
+      }
+    echo "</div>";
+  echo "</div>";
   }
 
   // Show all of the logged in user's fermentations
