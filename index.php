@@ -6,27 +6,6 @@
 
   $fermentsList = new UsersView();
 
-  // if (isset($_POST['submit'])) {
-  //   $name = $_POST['name'];
-  //   $startDate = $_POST['start-date'];
-  //   $endDate = $_POST['end-date'];
-  //   $type = $_POST['type'];
-  //   $totalDays = $_POST['total-days'];
-  //   $spices = $_POST['spices'];
-  //   $notes = $_POST['notes'];
-  //   // todo: make this a function in the ferments class to handle errors
-  //   if (empty($name) || empty($startDate) || empty($endDate) || empty($type) || 
-  //   empty($totalDays) || empty($spices) || empty($notes)) {
-  //     header('Location index.php');
-  //     exit();
-  //   } else {
-  //     $newFerment = new UsersContr();
-  //     $newFerment->createFerment($name, $startDate, $endDate, $type, $totalDays, 
-  //                                 $spices, $notes);
-  //     // todo: make a function in the view class to display these messages
-  //     echo "<h3> Entry of: '" . $_POST['name'] . "' entered successfully! </h3>";
-  //   }
-  // }
   if (isset($_POST['login-sbmt'])) {
     $username = $_POST['uid'];
     $pwd = $_POST['pwd'];
@@ -58,8 +37,13 @@
       <span class="span-fill">Welcome aboard</span>
     </div>
   </div>
+  
+
 </div>
 <!-- /.end banner image -->
+<div class="cta">
+   <button class="btn-orange" id="open-modal">Sign Up</button>
+</div>
 
 <?php
   require 'includes/header.inc.php';
@@ -205,7 +189,7 @@
      
       <div>
         <h3>Most Popular:</h3>
-        <?php $fermentsList->showPopList(); ?>
+        <?php $fermentsList->showPopList('5'); ?>
       </div>
       <div>
         <h3>Most Discussed:</h3>

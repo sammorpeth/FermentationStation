@@ -11,8 +11,11 @@
 
   if (!isset($_GET['username'])) {
     $username = $_SESSION['username'];
+    // Change the $name var so it doesn't say something like "Dosed's profile" when Dosed is logged in.
+    $name = 'Your';
   } else {
     $username = $_GET['username'];
+    $name = $username . "'s";
   }
 
   // $username = $_SESSION['username'];
@@ -61,27 +64,19 @@
 
 <!-- Display users ferments with a recent comment -->
   <div class="message">
-    <?php echo "<h2>" . $username . "'s Recipes"?>
-  </div>
+    <?php echo "<h2>" . $name . " Recipes"?>
+  </div> <!-- /end messsage -->
   <div class="col-split">
   <!-- <button class="btn-orange" id="open-modal">Add Ferment </button> -->
     <?php 
       $userProfile->showUserFerments($username);
     ?>
   </div>
-
-
-  <?php
-    // if the current user is the same as a user who is clicked on in a recipe page for example,
-    // that is passed in as the user's profile to be displayed. If not it checks the $_GET['username'] variable
-    // to see whihc profile had been clicked on in the link. Could maybe make this its own function? 
-  
-
-  ?>
-  </div>
+ 
 
 </div>
 
+<script src="carousel.js"></script>
 <?php
   include 'includes/footer.inc.php'; 
 ?>

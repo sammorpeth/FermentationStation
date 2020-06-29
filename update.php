@@ -50,7 +50,10 @@
     Notes: <input type="text" name="notes"> <br> <br>
     <input type="submit" name="update" value="Update Entry"> 
   </form>
-</div>
+
+ 
+
+
 
 <?php
   include 'includes/footer.inc.php';

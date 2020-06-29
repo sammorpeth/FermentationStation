@@ -298,7 +298,7 @@ class Users extends Dbh {
   }
 
   // Return the top 5 ferments based on how many votes are in the voters table
-  protected function getFermentsPopList() {
+  protected function getFermentsPopList($numOfResults) {
     // returns a list of items which match on both idFerments in each column and counts how many times the idFerment appears in the voters
     // table. this allows us to see how many times a certain ferment appears in the voters table and then get the name of the relevant
     // ferment from the ferments table. 
@@ -306,16 +306,15 @@ class Users extends Dbh {
             FROM voters AS v
             JOIN ferments AS f
             ON v.idFerment = f.idFerment
-            GROUP BY v.idFerment ORDER BY COUNT(v.idFerment) DESC LIMIT 5";
+            GROUP BY v.idFerment ORDER BY COUNT(v.idFerment) DESC LIMIT $numOfResults";
   // -- GROUP BY idFerment ORDER BY COUNT(idFerment) DESC LIMIT 5 //// COUNT(idFerment),
     $stmt = $this->connect()->prepare($sql);
-    $stmt->execute();
+    $stmt->execute([$numOfResults]);
     $results = $stmt->fetchAll();
     return $results;
   }
 
   // Return the top 5 ferments based on how many comments are in the comments table
-  
   protected function getFermentsDiscussList() {
     // does the same as the function above, but looks for the most discussed fermentation
     $sql = "SELECT c.idFerment, COUNT(c.idFerment), f.idFerment, f.name, f.user
@@ -377,9 +376,14 @@ class Users extends Dbh {
 
   // Delete current ferementation entry - relevant to current page
   protected function deleteEntry($idFerment) {
-    $sql = "DELETE FROM ferments WHERE idFerment=?";
-    $stmt = $this->connect()->prepare($sql);
-    $stmt->execute([$idFerment]);
+    // Ensures the entry is deleted from all relevant tables
+    $tables = array('ferments', 'comments', 'voters');
+    foreach($tables as $table) {
+      $sql = "DELETE FROM $table WHERE idFerment=?";
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$idFerment]);
+    }
+  
 
   }
 

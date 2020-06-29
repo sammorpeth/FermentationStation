@@ -37,6 +37,18 @@ h3 {
   margin-top: 0;
 }
 
+/* th elements have 'text-align: center' set. Setting it 'left' aligns it more neatly */
+th {
+  padding-bottom: 1em;
+  text-align: left;
+}
+
+td, th {
+  padding: .5em .5em;
+}
+
+
+
 
 
 /* ===================== PSUEDO CLASSES ==================== */
@@ -66,12 +78,14 @@ a:visited {
 /* ===================== BANNER IMG ==================== */
 
 .banner-container {
-  height: 100vh;
+  height: 85vh;
   display: flex;
+  
   font-size: 3vw;
   justify-content: center;
   align-items: center;
   background-color: #eee;
+  
 }
 
 .banner-container h1{
@@ -86,6 +100,25 @@ a:visited {
 .banner-container div div {
   color: #fc4a1a;
 }
+
+.cta {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: flex-start;
+  width: 50%;
+  z-index: -1;
+}
+
+.cta button {
+  padding: 1.5em 2em;
+  font-size: 1.2em;
+  border-radius: 30px;
+
+}
+
+
+
 
 
 /* =====================================================
@@ -256,6 +289,7 @@ nav li a:visited {
   padding: .5em 0;
 }
 
+.admin-table tr:nth-child(even),
 .comments > div:nth-child(even),
 .ingredients li:nth-child(even),
 .pop-lists > div > li:nth-child(even) {
@@ -306,12 +340,16 @@ nav li a:visited {
 }
 
 .modal-content {
-  padding: 20px;
+  padding: 1em 5em;
 }
 
 .modal-form label {
   display: block;
   margin-bottom: 5px;
+}
+
+.modal-form input {
+  margin-bottom: 1em;
 }
 
 /* along with the dispay block this stretches out each input field and gives them
@@ -337,14 +375,15 @@ a nice amount of padding */
 
 /* ===================== /END MODAL ==================== */
 
-/* ===================== MODAL ==================== */
+/* ===================== CAROUSEL ==================== */
 
+.cta,
 .carousel__track button,
 .btn-grey,
 .btn-orange {
   border-radius: 16px;
   margin: 8px 10px;
-  padding: 10px;
+  padding: .8em 1em;
   cursor: pointer;
   font-weight: 700;
 }
@@ -362,7 +401,9 @@ a nice amount of padding */
   border: 1px solid #fc4a1a;
 }
 
-/* ===================== /END MODAL ==================== */
+
+
+/* ===================== /END CAROUSEL ==================== */
 
 
 .social-profile {
@@ -370,6 +411,8 @@ a nice amount of padding */
   border: 1px solid black;
   margin: 0em 1em 1em 1em;
   padding: 1em;
+  border-radius: 5px;
+
 }
 
 .user-ferments {
@@ -411,6 +454,7 @@ a nice amount of padding */
   background: white;
   grid-template-columns: .1fr 1fr;
   border: 1px solid #000;
+  border-radius: 5px;
 }
 
 /* If a user has no recipes this stops the normal formatting and columns of a recipe */
@@ -461,6 +505,33 @@ a nice amount of padding */
   margin-left: 1em;
 
 }
+/* ===================== ADMIN ==================== */
+
+.admin-table {
+  background: #fff;
+  padding: 1em;
+  margin-top: 1em;
+  width: 100%;
+}
+
+.admin-buttons {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.admin-buttons input:first-of-type {
+  margin-left: none;
+}
+
+.admin-options {
+  display: flex;
+  margin: 1.5em 0;
+}
+
+.admin-options button:first-of-type {
+  margin-left: 0;
+}
+
 
 
 /* ===================== COMMENTS ==================== */
@@ -480,8 +551,11 @@ a nice amount of padding */
 
 .comment-box {
   display: flex;
-  margin: 1em 0em;
+  flex-direction: column;
+  margin: 3em 0em;
+
 }
+
 
 
 /* ===================== IMG FORMATTING ==================== */

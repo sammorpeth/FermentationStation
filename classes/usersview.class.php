@@ -36,7 +36,6 @@ class UsersView extends Users {
     <input class="btn-orange" type="submit" name="login-sbmt" value="Log In">
 
     </form>
-    <button class="btn-orange" id="open-modal">Sign Up</button>
     ';
   }
 
@@ -70,6 +69,10 @@ class UsersView extends Users {
   // for social page
   public function displayAllUserProfiles() {
     $results = $this->getAllUserProfiles();
+    // array_column — Return the values from a single column in the input array
+    $keys = array_column($results, 'username');
+    // array_multisort — Sort multiple or multi-dimensional arrays
+    array_multisort($keys, SORT_ASC, $results);
 
     foreach ($results as $row) {
       $username = $row['username'];
@@ -96,7 +99,7 @@ class UsersView extends Users {
         '<li><strong>Most popular recipe</strong>: '. $numOfFerments .'</li>' .
         '<li><strong>Member since</strong>: '. $row['user_since'].'</li>' 
      .'</ul>
-      <a href="user-ferment.php?username='. $username.'">'. $username .'\'s Ferments</a>
+      <a href="profile.php?username='. $username.'">'. $username .'\'s Ferments</a>
       </div>';
       // Find the most recent recipe by a user
       $usersRecipe = new UsersContr();
@@ -122,10 +125,6 @@ class UsersView extends Users {
       } 
     }
   }
-
-
-
-  
 
   // ================ COMMENTS SYSTEM ================== //
 
@@ -224,12 +223,14 @@ class UsersView extends Users {
             <td><li>Admin</li><input type="radio" name="upgrade-type" 
                                   id="admin" 
                                   value="admin"></td>
-            <td>
-              <input type="submit" name="submit" value="Upgrade">
+            <td class="admin-buttons">
+              <input class="btn-orange" type="submit" name="submit" value="Upgrade">
+              <input class="btn-orange" type="submit" name="ban" value="Ban">
+              <input class="btn-orange" type="submit" name="delete" value="Delete">
             </td>
             <input type="hidden" id="userId" name="userId" value="'. $row['userId'] . '">
           </form>
-          <tr>
+          </tr>
           ';
     }
   }
@@ -242,7 +243,6 @@ class UsersView extends Users {
     $entryName = $this->getFermentName($idFerment);
     echo $entryName;
   }
-
   // Format and show the relevant recipe with full instructions
   public function showFerment($idFerment) {
     $fermentObj = new UsersContr();
@@ -264,7 +264,24 @@ class UsersView extends Users {
                  </div>
                   <p><strong>Instructions:</strong>:" . $ferment[0]['instructions']. "</p>
          ";
-    $this->showIngredientsList($ferment[0]['spices']);
+
+         $this->showIngredientsList($ferment[0]['spices']);
+
+        // TODO: if the user is equal to the recipe displayed they can also delete/update the entry from this page. 
+         if (isset($_SESSION['user_type']) == 'admin') {
+          echo "<h3>Admin Options</h3>
+                <div class='admin-options'>
+                  <button class='btn-orange' id='open-modal'>Update</button>
+                  <form method='post'>
+                    <input class='btn-orange' type='submit' value='Delete' name='delete' href='delete.php?idFerment=" . $ferment[0]['idFerment'] ."'></input>
+                  </form>
+                </div>
+              </div>" . " ";
+          // The last div here is closing the 'full-recipe' div on line 249
+        }
+
+   
+     
   }
 
   // Format the ingredients in a list
@@ -278,8 +295,9 @@ class UsersView extends Users {
       echo "<li>". $listCounter. ". ". $ingredient . "</li>";
       $listCounter++;
     }
+    // There was a </div> underneath the </ul> and I don't know why. I'll leave this here in case it breaks everything as a reminder.
     echo "</ul>
-          </div>";
+          ";
 
   }
   
@@ -309,14 +327,9 @@ class UsersView extends Users {
               <div>
                 <a href='recipe.php?idFerment=". $recipe['idFerment'] ."&user=" . $recipe['user'] ."'>Read more...</a>
               </div>";
-    // TODO: if the user is equal to the recipe displayed they can also delete/update the entry from this page
-      if (isset($_SESSION['user_type']) == 'admin') {
-        echo "<div>
-                <a href='update.php?idFerment=" . $recipe['idFerment'] ."'>Update</a>" . 
-                " <a href='delete.php?idFerment=" . $recipe['idFerment'] ."'>Delete</a>
-                </div>
-              </div>" . " ";
-      }
+    
+      echo "</div>";
+
     echo "</div>";
   echo "</div>";
   }
@@ -367,9 +380,9 @@ class UsersView extends Users {
 
   // should probably make these one function and change the parameters, although the SQL query is quite different.
   // Show the most popular fermentations in terms of votes and format them in a list.
-  public function showPopList() {
+  public function showPopList($numOfResults) {
     $ferment = new UsersContr();
-    $results = $ferment->returnFermentsPopList();
+    $results = $ferment->returnFermentsPopList($numOfResults);
     $counter = 1;
     foreach ($results as $row) {
       echo "<li>" . $counter . ". <a href='recipe.php?idFerment=" . $row['idFerment']. "&user=" . $row['user'] . "'>" . ucfirst($row['name']) . "</a></li>";
@@ -395,7 +408,9 @@ class UsersView extends Users {
   // display message upon deleting/updating an entry with relevant name
   public function showMsg($idFerment, string $type) {
     $entryName = $this->getFermentName($idFerment);
-    echo "<h3>Entry of: " . "'" . $entryName ."'" . " successfully " . $type . "!</h3>";
+    echo "<div class='message'>
+          <h3>Entry of: " . "'" . $entryName ."'" . " successfully " . $type . "!</h3>
+          </div>";
   }
 
 }

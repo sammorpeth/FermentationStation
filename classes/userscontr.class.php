@@ -122,8 +122,8 @@ class UsersContr extends Users {
     return $this->getAllFerments();
   }
 
-  public function returnFermentsPopList() {
-    return $this->getFermentsPopList();
+  public function returnFermentsPopList($numOfResults) {
+    return $this->getFermentsPopList($numOfResults);
   }
 
   public function returnFermentsDiscussList() {

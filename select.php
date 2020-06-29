@@ -11,6 +11,9 @@
   </form> -->
 
 <div class="wrapper">
+  <div class="message">
+    <h2>All Recipes</h2>
+  </div>
   <div class="col-split">
     <div class="main-col">
       <?php
