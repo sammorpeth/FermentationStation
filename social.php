@@ -8,7 +8,7 @@
 ?>
 <div class="wrapper">
 
-    <div class="message">
+    <div class="message titles">
       <div >
         <h2>Users</h2>
       </div>

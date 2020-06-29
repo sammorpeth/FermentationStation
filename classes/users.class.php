@@ -31,7 +31,7 @@ class Users extends Dbh {
 
       $pwdCheck = password_verify($pwd, $results[0]['hashed_pwd']);
       if ($pwdCheck == false) {
-        echo 'pwd nat kewl';
+        header('Location: index.php?error=incorrectpassword');
       } else if ($pwd == true) {
         session_start();
         $_SESSION['username'] = $results[0]['username'];
@@ -49,21 +49,21 @@ class Users extends Dbh {
     // check for empty values
     if (empty($username) || empty($email) || empty($pwd) || empty($pwdRepeat)) {
       // does not seem to repopulate the fields for some reason.
-      header('Location: signup.php?error=emptyfields&username='.$username);
+      header('Location: index.php?error=emptyfields&username='.$username);
       exit();
     } else if ($pwd !== $pwdRepeat) {
       // does not seem to repopulate the fields for some reason.
-      header('Location: signup.php?error=mismatchedpasswords&username='.$username);
+      header('Location: index.php?error=mismatchedpasswords&username='.$username);
       exit();
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      header('Location: signup.php?error=invalidemail');
+      header('Location: index.php?error=invalidemail');
       exit();
     } else if(!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
-      header('Location: signup.php?error=invalidusername');
+      header('Location: index.php?error=invalidusername');
       exit();
     } else if($previousUser >= 1) {
       // TODO: format error message. 
-      header('Location: signup.php?error=usernametaken');
+      header('Location: index.php?error=usernametaken');
       echo "USERNAME OR EMAIL TAKEN";
       exit();
     }
@@ -227,9 +227,6 @@ class Users extends Dbh {
     $stmt->execute([$voter, $idFerment]);
   }
 
-
- 
-
   // ================ ADMIN FEATURES ================== //
 
   // Get the user's type and other info for the admin page 
@@ -345,21 +342,17 @@ class Users extends Dbh {
   }
 
 
-  // $ingredients = "cumin, seven spice mix, flake, sprinkles";
-  // $indvIngredients = explode(", ", $ingredients);
-  // echo $indvIngredients[0];
-
   // =============================================================================== //
   // =========================== CRUD FERMENTATIONS ================================ //
   // =============================================================================== //
 
   // Create a new fermentation entry
-  protected function setFerment($name, $startDate, $endDate, $type, 
+  protected function setFerment($user, $name, $startDate, $endDate, $type, 
   $totalDays, $spices, $instructions, $notes) {
-    $sql = "INSERT INTO ferments(name, start_date, end_date, type, 
-            total_days, spices, instructions, notes) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO ferments(user, name, start_date, end_date, type, 
+            total_days, spices, instructions, notes) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $this->connect()->prepare($sql);
-    $stmt->execute([$name, $startDate, $endDate, $type, 
+    $stmt->execute([$user, $name, $startDate, $endDate, $type, 
                     $totalDays, $spices, $instructions, $notes]);
   }
 

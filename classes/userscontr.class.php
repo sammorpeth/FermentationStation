@@ -142,10 +142,10 @@ class UsersContr extends Users {
   // ================= CRUD FERMENTATIONS ================= //
   // ====================================================== //
 
-  public function createFerment($name, $startDate, $endDate, $type, 
+  public function createFerment($user, $name, $startDate, $endDate, $type, 
   $totalDays, $spices, $instructions, $notes) {
     
-    $this->setFerment($name, $startDate, $endDate, $type, 
+    $this->setFerment($user, $name, $startDate, $endDate, $type, 
     $totalDays, $spices, $instructions, $notes);
   }
 

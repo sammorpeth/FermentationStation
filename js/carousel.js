@@ -27,8 +27,8 @@ const setSlideImg = (slideNum, imgUrl) => {
 
 }
 
-setSlideImg(0,'url(img/dinner.jpg) no-repeat');
-setSlideImg(1,'url(img/kimchi.jpg) no-repeat');
+setSlideImg(0,'url(img/kimchi.jpg) no-repeat');
+setSlideImg(1,'url(img/dinner.jpg) no-repeat');
 setSlideImg(2,'url(img/pancakes.jpg) no-repeat');
 
 

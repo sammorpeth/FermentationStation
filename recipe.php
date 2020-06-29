@@ -62,7 +62,6 @@
         $idFerment = $_GET['idFerment'];
         $ferment->showFerment($idFerment);      
       ?>
-
       
       <div class="comment-box">
       <h2>Leave a comment</h2>
@@ -72,20 +71,6 @@
           <input class="btn-orange" type="submit" name="submit-comment" value="Submit">
         </form>
       </div>
-
-          <!-- <div class="add-recipe">
-      <form action="" method="post">
-        Name: <input type="text" name="name"> <br>
-        Start date: <input type="text" name="start-date"> <br>
-        End date: <input type="text" name="end-date"> <br>
-        Type: <input type="text" name="type"> <br>
-        Total days: <input type="text" name="total-days"> <br>
-        Spices: <input type="text" name="spices"> <br>
-        Notes: <input type="text" name="notes"> <br> <br>
-        Instructions: <textarea name="instructions"></textarea>
-        <input type="submit" name="submit-ferment" value="Submit"> 
-      </form>
-    </div> -->
       <?php
         $ferment->show5RecentComments($idFerment);
 
@@ -149,5 +134,4 @@
 
 <?php
   include 'includes/footer.inc.php';
-
 ?>

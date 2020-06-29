@@ -41,9 +41,6 @@
 
 </div>
 <!-- /.end banner image -->
-<div class="cta">
-   <button class="btn-orange" id="open-modal">Sign Up</button>
-</div>
 
 <?php
   require 'includes/header.inc.php';
@@ -57,6 +54,45 @@
   </div>
 </div>
 <div class="container">
+
+<div>
+  <?php 
+    // if the form is successfully submitted a message is created telling the user they successfully created
+    // an account
+    if (isset($_POST['sign-up'])) {
+      $newMsg = new UsersView();
+      $newMsg->showGeneralMsg('User', 'created');
+    }
+
+    // Display appropriate error messages for the sign-up form
+    if (isset($_GET['error'])) {
+      $newMsg = new UsersView();
+      $newMsg->showError($_GET['error']);
+    }
+  ?>
+</div>
+
+
+<div class="intro">
+  <h2>Welcome to the Fermentation Station!</h2>
+  <p>Lorem ipsum dolor sit amet consectetur <a href=''>adipisicing elit</a>. Autem assumenda minus porro expedita sed saepe inventore commodi molestiae, 
+  at aspernatur amet quia voluptatem laboriosam ducimus iusto dignissimos mollitia illo magni.</p>
+   <p>Lorem ipsum dolor sit amet consectetur, <a href=''>adipisicing</a> elit. Nobis nesciunt, blanditiis fugit assumenda itaque recusandae 
+  rem placeat velit dolorum odio,saepe quo voluptatem! Aspernatur totam atque tempore, dignissimos illo nobis est modi at,
+   facere nemo deserunt provident sequi quas vel maiores architecto in eaque quae, earum esse suscipit quod illum. Lorem ipsum dolor sit amet consectetur 
+   adipisicing elit. Suscipit quae eum consectetur corporis nobis nisi, porro dolore, perspiciatis adipisci laudantium sed ipsa?
+    Sed, animi ullam. Recusandae illo earum dolorem enim.</p>
+     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis<a href=''>nesciunt, blanditiis</a> fugit assumenda itaque recusandae 
+  rem placeat velit dolorum odio,saepe quo voluptatem! Aspernatur totam atque tempore, dignissimos illo nobis est modi at,
+   facere nemo deserunt provident sequi quas vel maiores architecto in eaque quae, earum esse suscipit quod illum. Lorem ipsum dolor sit amet consectetur 
+   adipisicing elit. Excepturi molestiae, <a href=''>repellat sapiente asperiores</a> soluta id quis deleniti iure ipsam magni. Lorem ipsum dolor sit amet consectetur adipisicing
+    elit. Ipsum quisquam recusandae odit natus nam voluptate cumque, culpa animi ratione saepe placeat quas! Odio consectetur recusandae adipisci, 
+    quisquam explicabo fugit provident voluptas culpa voluptatum, ratione cumque neque. Error <a href=''>omnis </a>obcaecati possimus?</p>
+   <div class="cta">
+   <button class="btn-orange" id="open-modal">Sign Up</button>
+  </div>
+
+</div>
 
 
 <!----- Carousel ------>
@@ -206,6 +242,40 @@
 
   </div> <!-- end /.ad-col -->
 </div> <!-- end /.col-split -->
+
+<!-- Modal -->
+ <div class="modal-container" id="modal">
+  <div class="modal">
+    <button class="close-btn" id="close-modal">X</button>
+    <div class="modal-header">
+      <h3>Sign Up</h3>
+    </div>
+    <div class="modal-content">
+      <p>Sign up today for great recipes, new friends and more</p>
+      <form action="" method="post" class="modal-form">
+        <div>
+          <label for="name">Name</label>
+          <input name="username" type="text" id="name" placeholder="Enter Name" class="form-input">
+        </div>
+        <div>
+          <label for="email"  >Email</label>
+          <input name="email" type="email" id="email" placeholder="Enter Email"  class="form-input">
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input name="pwd" type="password" id="password" placeholder="Enter Password"  class="form-input">
+        </div>
+        <div>
+          <label for="password2">Confirm password</label>
+          <input name="pwd-confirm" type="password" id="password2" placeholder="Confirm Password"  class="form-input">
+        </div>
+        <input class="btn-orange" type="submit" name="sign-up" value="Submit"> 
+
+      </form>
+    </div>
+  </div>
+</div> 
+  
 
 
 <script src="js/carousel.js"></script>

@@ -89,18 +89,22 @@ class UsersView extends Users {
         $gender = 'men';
       }
 
-      echo '<div class="social-profile">
-      <h3>' . $username.'\'s Profile</h3>
-      <ul>'.
-        '<img src="https://randomuser.me/api/portraits/'. $gender .'/' . $randomNum .'.jpg" class="profile-pic">' . 
-        '<li><strong>Username</strong>: '.$row['username'] . '</li>' .
-        '<li><strong>Number of ferments</strong>: '. $numOfFerments .'</li>' .
-        // todo: add most popular recipe
-        '<li><strong>Most popular recipe</strong>: '. $numOfFerments .'</li>' .
-        '<li><strong>Member since</strong>: '. $row['user_since'].'</li>' 
-     .'</ul>
-      <a href="profile.php?username='. $username.'">'. $username .'\'s Ferments</a>
-      </div>';
+      echo '<div class="social-profile social-details">' . 
+      '<div>
+        <img class="rounded-pic" src="https://randomuser.me/api/portraits/'. $gender .'/' . $randomNum .'.jpg" >
+       </div>' .
+      '<div>
+        <h3>' . $username.'\'s Profile</h3>
+        <ul>'.
+          '<li><strong>Username</strong>: '.$row['username'] . '</li>' .
+          '<li><strong>Number of ferments</strong>: '. $numOfFerments .'</li>' .
+          // todo: add most popular recipe
+          '<li><strong>Most popular recipe</strong>: '. $numOfFerments .'</li>' .
+          '<li><strong>Member since</strong>: '. $row['user_since'].'</li>' 
+      .'</ul>
+        <a href="profile.php?username='. $username.'">'. $username .'\'s Ferments</a>
+        </div>
+      </div> <!-- /end social-profile -->';
       // Find the most recent recipe by a user
       $usersRecipe = new UsersContr();
       $results = $usersRecipe->returnUserRecentRecipe($username);
@@ -225,8 +229,7 @@ class UsersView extends Users {
                                   value="admin"></td>
             <td class="admin-buttons">
               <input class="btn-orange" type="submit" name="submit" value="Upgrade">
-              <input class="btn-orange" type="submit" name="ban" value="Ban">
-              <input class="btn-orange" type="submit" name="delete" value="Delete">
+              
             </td>
             <input type="hidden" id="userId" name="userId" value="'. $row['userId'] . '">
           </form>
@@ -268,7 +271,7 @@ class UsersView extends Users {
          $this->showIngredientsList($ferment[0]['spices']);
 
         // TODO: if the user is equal to the recipe displayed they can also delete/update the entry from this page. 
-         if (isset($_SESSION['user_type']) == 'admin') {
+         if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') {
           echo "<h3>Admin Options</h3>
                 <div class='admin-options'>
                   <button class='btn-orange' id='open-modal'>Update</button>
@@ -278,6 +281,8 @@ class UsersView extends Users {
                 </div>
               </div>" . " ";
           // The last div here is closing the 'full-recipe' div on line 249
+        } else {
+          echo "</div>";
         }
 
    
@@ -409,8 +414,44 @@ class UsersView extends Users {
   public function showMsg($idFerment, string $type) {
     $entryName = $this->getFermentName($idFerment);
     echo "<div class='message'>
-          <h3>Entry of: " . "'" . $entryName ."'" . " successfully " . $type . "!</h3>
+          <h3>" . "'" . $entryName ."'" . " successfully " . $type . "!</h3>
           </div>";
   }
+
+  public function showGeneralMsg($item, $type) {
+    echo "<div class='message'>
+          <h3>" . $item .": " . " successfully " . $type . "!</h3>
+          </div>";
+  }
+
+  public function showError($error) {
+    // sign up form errors
+    if($error == 'emptyfields') {
+      echo "<div class='message'>
+          <h3>It appears you left some fields blank!</h3>
+          </div>";
+    } elseif ($error == 'mismatchedpasswords') {
+      echo "<div class='message'>
+      <h3>Your passwords don't match up.</h3>
+      </div>";
+    } elseif ($error == 'invalidusername') {
+      echo "<div class='message'>
+      <h3>Please enter a valid username. Only use alphanumeric characters.</h3>
+      </div>";
+    } elseif ($error == 'invalidemail') {
+      echo "<div class='message'>
+      <h3>Please enter a valid email.</h3>
+      </div>";
+    } elseif ($error == 'usernametaken') {
+      echo "<div class='message'>
+      <h3>It looks like that username has already been taken. Please enter a different one.</h3>
+      </div>";
+    // password error
+    }  elseif ($error == 'incorrectpassword') {
+      echo "<div class='message'>
+      <h3>Incorrect password.</h3>
+      </div>";
+    }
+  } 
 
 }

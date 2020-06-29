@@ -1,4 +1,5 @@
 
-<script src="js/modal.js"></script>
 </body>
+<script src="js/modal.js"></script>
+
 </html>

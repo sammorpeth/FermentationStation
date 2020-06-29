@@ -78,7 +78,7 @@ a:visited {
 /* ===================== BANNER IMG ==================== */
 
 .banner-container {
-  height: 85vh;
+  height: 100vh;
   display: flex;
   
   font-size: 3vw;
@@ -101,14 +101,7 @@ a:visited {
   color: #fc4a1a;
 }
 
-.cta {
-  display: flex;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: flex-start;
-  width: 50%;
-  z-index: -1;
-}
+
 
 .cta button {
   padding: 1.5em 2em;
@@ -126,19 +119,7 @@ a:visited {
    ===================================================== */
 
 /* ===================== FORMATTING/LAYOUT/GRIDS ==================== */
-/* .nav-parent-wrapper {
-  position: relative;
- 
-}
 
-.test-wrapper {
-  display: flex;
-}
-
-.nav-bar-wrapper {
-  margin: 0 auto;
-  position: absolute;
-} */
 
 
 .container {
@@ -159,19 +140,6 @@ a:visited {
 
 /* ===================== NAV BAR ==================== */
 
-/* nav {
-  background-color: #fc4a1a;
-  height: 100vh;
-  width: 100%;
-}
-
-.nav-wrapper {
-  width: 100%;
-}
-
-nav li a:visited {
-  color: #fff;
-} */
 
 .nav-bar {
   display: grid;
@@ -209,6 +177,26 @@ nav li a:visited {
 /* should probably figure out the css module thing again */
 
 /* ===================== INDEX ==================== */
+
+.intro {
+  font-size: 1.2em;
+  background: #fff;
+  padding: 1.5em;
+  margin-bottom: 2em;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.intro h2 {
+  text-align: center;
+}
+
+.intro .cta {
+ display: flex;
+ justify-content: center;
+}
+
 
 .carousel {
   width: 80%;
@@ -406,12 +394,17 @@ a nice amount of padding */
 /* ===================== /END CAROUSEL ==================== */
 
 
+
 .social-profile {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center;
+  align-items: center; */
   background: white;
   border: 1px solid black;
   margin: 0em 1em 1em 1em;
   padding: 1em;
-  border-radius: 5px;
+  border-radius: 10px;
 
 }
 
@@ -439,22 +432,19 @@ a nice amount of padding */
 }
 
 
-
-/* ===================== INDEX ==================== */
-
-
 /* ===================== RECIPES/FERMENTATIONS ==================== */
 
-
+.social-details,
 .recipe {
   margin-top: 0em;
   margin-bottom: 1em;
   padding: 1em;
   display: grid;
   background: white;
-  grid-template-columns: .1fr 1fr;
+  grid-template-columns: .5fr 1fr;
   border: 1px solid #000;
   border-radius: 5px;
+  gap: 1em;
 }
 
 /* If a user has no recipes this stops the normal formatting and columns of a recipe */
@@ -533,7 +523,6 @@ a nice amount of padding */
 }
 
 
-
 /* ===================== COMMENTS ==================== */
 
 .comments {
@@ -553,12 +542,13 @@ a nice amount of padding */
   display: flex;
   flex-direction: column;
   margin: 3em 0em;
-
 }
 
-
-
 /* ===================== IMG FORMATTING ==================== */
+
+.rounded-pic {
+  border-radius: 50%;
+}
 
 .profile-pic {
   width: 20%;
@@ -594,19 +584,24 @@ a nice amount of padding */
    ===================================================== */
 
 .message {
-  display: flex;
-  justify-content: flex-start;
   color: white;
   background: #fc4a1a;
   padding: 1em;
-  /* margin: 1em; */
+  margin-bottom: 1em;
   width: 100%;
   border-radius: 5px;
   box-shadow: 3px 3px 1px 1px #fff;
+  text-align: center;
 }
 
 .message div {
   width: 50%;
+}
+
+/* Format the titles on the social page */
+.message.titles {
+  display: flex;
+  
 }
 
 /* =====================================================

@@ -5,8 +5,9 @@
   include_once 'classes/usersview.class.php';
   include_once 'classes/userscontr.class.php';
 
-  // require 'includes/auth.inc.php';
-
+  require 'includes/auth.inc.php';
+  
+  var_dump ($_SESSION);
 //   if (isset($_GET['idFerment']) && ctype_digit($_GET['idFerment'])) {
 //     $idFerment = $_GET['idFerment'];
 //   } else {
