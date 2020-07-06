@@ -5,10 +5,6 @@
   include_once 'classes/userscontr.class.php';
 ?>
 
-  <!-- <form action="" method="post">
-    Search for a user: <input type="text" name="user-search">
-    <input type="submit" name="user-search-sbmt" value="Search Users">
-  </form> -->
 
 <div class="wrapper">
   <div class="message">
@@ -17,12 +13,7 @@
   <div class="col-split">
     <div class="main-col">
       <?php
-        // if (isset($_POST['user-search-sbmt'])) {
-        //   $username = $_POST['user-search'];
-        //   $usersFerments = new UsersView();
-        //   $usersFerments->showUserFerments($username);
-        // }
-
+   
         $fermentList = new UsersView();
         $fermentList->showAllFerments();
       ?>

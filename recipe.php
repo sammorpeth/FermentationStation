@@ -6,7 +6,7 @@
 
   // require 'includes/auth.inc.php';
 
-
+  // Handle comment form submission
   if (isset($_POST['submit-comment'])) {
     $newComment = new UsersContr();
     $idFerment = $_GET['idFerment'];
@@ -17,9 +17,11 @@
     $newComment->enterComment($idFerment, $commenter, $recipient, $userComment);
   }
 
+  // Handle delete CRUD
   if (isset($_POST['delete'])) {
     $idFerment = $_GET['idFerment'];
 
+    // Handle successful completion of entry being deleted
     $newFerment = new UsersContr();
     $entryName = $newFerment->returnFermentName($idFerment);
     $newMsg = new UsersView();
@@ -28,14 +30,12 @@
     $newFerment->deleteFerment($idFerment);
 
     header('Location: delete.php?entryName=' . $entryName);
-  
-   
   }
-
 ?>
 
 <div class="wrapper">
   <?php
+  // Handle update form submission
   if (isset($_POST['update'])) {
 
     $name = $_POST['name'];
@@ -58,6 +58,7 @@
   <div class="col-split">
     <div class="main-col">
       <?php 
+        // Show formatted recipe
         $ferment = new UsersView();
         $idFerment = $_GET['idFerment'];
         $ferment->showFerment($idFerment);      

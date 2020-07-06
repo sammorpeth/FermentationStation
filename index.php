@@ -6,10 +6,12 @@
 
   $fermentsList = new UsersView();
 
+  // Handle log in form submission
   if (isset($_POST['login-sbmt'])) {
     $username = $_POST['uid'];
     $pwd = $_POST['pwd'];
 
+    // Check the details the user has entered agains the details for that user in the DB.
     $newUser = new UsersContr();
     $newUser->checkLoginDetails($username, $pwd);
   }
@@ -46,13 +48,7 @@
   require 'includes/header.inc.php';
 ?>
 
-<div class="nav-parent-wrapper">
-  <div class="nav-wrapper">
-    <?php
-        require 'includes/nav.inc.php'; 
-    ?>
-  </div>
-</div>
+
 <div class="container">
 
 <div>

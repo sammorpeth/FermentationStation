@@ -50,11 +50,12 @@
         <li><a href="select.php">Fermentations</li></a>
         <?php 
        
-
+          // shows admin link to admins
           if (isset($_SESSION['username']) && $_SESSION['user_type'] == 'admin') {
             echo '<li><a href="users.php">Admin</li></a>';
             echo '<li><a href="profile.php">Your profile</li></a>';
             echo '<li><a href="social.php">Social</li></a>';
+          // shows profile link to logged in users
           } elseif (isset($_SESSION['username']) && $_SESSION['user_type'] == 'user') { 
             echo '<li><a href="social.php">Social</li></a>';
             echo '<li><a href="profile.php">Your profile</li></a>';
@@ -67,10 +68,11 @@
       </div>
       <div class="social">
       <?php 
+      // Shows logged in message
         if (isset($_SESSION['username'])) {
          $loggedIn = new UsersView();
          $loggedIn->loggedInDisplay();
-         
+      // Shows log in buttons
         } else {
          $loggedOut = new UsersView();
          $loggedOut->loggedOutDisplay();

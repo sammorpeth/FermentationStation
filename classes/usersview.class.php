@@ -190,23 +190,7 @@ class UsersView extends Users {
     }
    
   }
-  // use this when i've built the full recipe page
-  // $idFerment = $row['idFerment'];
-  // $this->showRecentComment($idFerment); 
-  // // this should be its own function since it's handling a form submission and not just displaying stuff
-  // $previousVote = $this->checkVoteExists($username, $idFerment);
-  
-  // echo "<span>Comment on this recipe</span>
-  //         <form action='' method='post'>
-  //           <textarea rows='4' cols='40' name='comment'></textarea>
-  //           <input type='hidden' id='idFerment' name='idFerment' value='". $row['idFerment']."'>
-  //           <br>
-  //           <input type='submit' name='submit'>";
-  //           if (!$previousVote == 1) {
-  //             echo "<input type='submit' name='vote' value='Vote'>";
-  //           }
-  // echo "  </form>
-  //       </div>";
+
 
   // ================ ADMIN VIEW ================== //
 
@@ -418,11 +402,7 @@ class UsersView extends Users {
           </div>";
   }
 
-  public function showGeneralMsg($item, $type) {
-    echo "<div class='message'>
-          <h3>" . $item .": " . " successfully " . $type . "!</h3>
-          </div>";
-  }
+ 
 
   public function showError($error) {
     // sign up form errors

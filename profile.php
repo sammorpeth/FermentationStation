@@ -52,7 +52,6 @@
     ?>
   </div> <!-- /end messsage -->
   <div class="col-split">
-  <!-- <button class="btn-orange" id="open-modal">Add Ferment </button> -->
     <?php 
       $userProfile->showUserFerments($username);
     ?>
