@@ -85,7 +85,11 @@
     elit. Ipsum quisquam recusandae odit natus nam voluptate cumque, culpa animi ratione saepe placeat quas! Odio consectetur recusandae adipisci, 
     quisquam explicabo fugit provident voluptas culpa voluptatum, ratione cumque neque. Error <a href=''>omnis </a>obcaecati possimus?</p>
    <div class="cta">
-   <button class="btn-orange" id="open-modal">Sign Up</button>
+    <!-- Only visible if there is no user logged in. -->
+   <?php if (!isset($_SESSION['username'])) {
+      echo '<button class="btn-orange" id="open-modal">Sign Up</button>';
+     };
+   ?>
   </div>
 
 </div>
@@ -221,11 +225,12 @@
      
       <div>
         <h3>Most Popular:</h3>
-        <?php $fermentsList->showPopList('5'); ?>
+        <?php $fermentsList->showList('voters', 'ferments', '5');?>
       </div>
       <div>
         <h3>Most Discussed:</h3>
-        <?php $fermentsList->showDiscussList(); ?>
+        <?php $fermentsList->showList('comments', 'ferments', '5');?>
+
       </div>
     </div><!-- end /.pop-lists -->
 
